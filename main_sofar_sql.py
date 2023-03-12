@@ -11,9 +11,11 @@ The script is written in Python and invoked using the cron mechanism at interval
 
 
 from pyModbusTCP.client import ModbusClient
+from pythonping import ping
 import json
 import sys
 import os
+
 
 def data_converter(param):  # funkcja  sprawdzajaca i przeliczająca czy dodatnia czy ujemna
 
@@ -24,7 +26,7 @@ def data_converter(param):  # funkcja  sprawdzajaca i przeliczająca czy dodatni
 
 
 def get_inverter_data_modbus(SERVER_MODBUS_HOST, SERVER_MODBUS_PORT):
-
+    print("Reading modbus...\n")
     c = ModbusClient(host=SERVER_MODBUS_HOST, port=SERVER_MODBUS_PORT, unit_id=1, timeout=5, auto_open=True,
                      auto_close=True)
     regs=c.read_holding_registers(0, 48)
@@ -35,10 +37,17 @@ def get_inverter_data_modbus(SERVER_MODBUS_HOST, SERVER_MODBUS_PORT):
         print("Modbus read error")
     sys.exit()
 
+
+
+
+
+
+
+
+
+
+
 ###########___start program___#################
-
-
-
 
 
 
@@ -48,14 +57,15 @@ with open('config.json') as jsonFile:
 SERVER_MODBUS_HOST = jsonObject['SERVER_MODBUS_HOST']
 SERVER_MODBUS_PORT = jsonObject['SERVER_MODBUS_PORT']
 
-resp = os.system("ping " + SERVER_MODBUS_HOST)
-if resp == 0:
+resp=str(ping(SERVER_MODBUS_HOST))
+resp = resp.find("Request timed out")
+
+if resp == -1:
         print(SERVER_MODBUS_HOST, 'Host is up')
+
 else:
         print(SERVER_MODBUS_HOST, 'Host is unreachable')
-
-#print(resp)
-
+        sys.exit()
 
 response_modbus = get_inverter_data_modbus(SERVER_MODBUS_HOST, SERVER_MODBUS_PORT)
 print(response_modbus,"\n")
