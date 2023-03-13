@@ -1,9 +1,0 @@
-{
-  	  "SQL_HOST": "192.168.5.140",
-	  "SQL_USER": "someuser",
-	  "SQL_PASSWORD": "passsw",
-	  "SQL_DATABASE": "Some_Base",
-
-	  "SERVER_MODBUS_HOST": "192.168.5.146",
-      "SERVER_MODBUS_PORT": 502
-}
