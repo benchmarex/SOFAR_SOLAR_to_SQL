@@ -32,6 +32,6 @@ Located here https://github.com/benchmarex/API_SOLARMAN_to_SQL_to_Grafana
 That project is still working, but after testing this it will be disabled. This project will completely take over the role of delivering data to the SQL server without involving the Solarman server.
 
 
-The connection between RS485 and Wifi was made using Elfin EW11 which was configured as a Modbus server and made available in the local network.
+The connection between RS485 to Wifi was made using Elfin EW11 which was configured as a Modbus server and made available in the local network.
 RS485 has been connected to one of the RS485 ports of the Sofar Solar KTL-X 11 inverter. 9600,8,1,n This is how the server in EW11 should be set to communicate with this Sofar. There is a MODBUS map of this Sofar in the project directory.
 
