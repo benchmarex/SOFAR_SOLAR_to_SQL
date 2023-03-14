@@ -12,6 +12,7 @@ from pythonping import ping
 import json
 import sys
 import datetime
+import pymysql
 
 
 def data_converter(param):  # funkcja  sprawdzajaca i przeliczająca czy dodatnia czy ujemna
@@ -83,9 +84,9 @@ AC_V1_CURRENT = response_modbus[0x10]/100
 AC_V2_CURRENT = response_modbus[0x12]/100
 AC_V3_CURRENT = response_modbus[0x14]/100
 
-AC_V1_3_ACTIVE_POWER = response_modbus[0x0c]
+AC_V1_3_ACTIVE_POWER = response_modbus[0x0c]*10
 
-AC_V1_3_REACTIVE_POWER = data_converter(response_modbus[0x0d])
+AC_V1_3_REACTIVE_POWER = data_converter(response_modbus[0x0d])*10
 
 AC_V1_3_FREQ = response_modbus[14]/100
 
@@ -127,8 +128,8 @@ DC_V2 = response_modbus[0x08]/10
 DC_V1_CURRENT = response_modbus[0x07]/100
 DC_V2_CURRENT = response_modbus[0x09]/100
 
-DC_V1_POWER = response_modbus[0x0a]/10
-DC_V2_POWER = response_modbus[0x0b]/10
+DC_V1_POWER = response_modbus[0x0a]*10
+DC_V2_POWER = response_modbus[0x0b]*10
 
 
 DC_V1_INSULATION_TO_GND = response_modbus[0x24]
